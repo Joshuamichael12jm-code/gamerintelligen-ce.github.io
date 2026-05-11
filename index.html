@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Game</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #1a1a2e;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+    }
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    #talkBtn {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: none;
+        background: #e94560;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 0 20px rgba(233, 69, 96, 0.6);
+    }
+    #talkBtn:active {
+        background: #ff6b81;
+        transform: scale(0.95);
+    }
+    #status {
+        margin-top: 20px;
+        font-size: 1.1rem;
+        color: #aaa;
+    }
+</style>
+</head>
+<body>
+<h1>Hold the Button and Talk</h1>
+<button id="talkBtn">Hold</button>
+<p id="status">Waiting...</p>
+
+<script>
+const btn = document.getElementById('talkBtn');
+const status = document.getElementById('status');
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (!SpeechRecognition) {
+    status.textContent = "Speech not supported on this browser. Use Safari or Chrome.";
+} else {
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition
